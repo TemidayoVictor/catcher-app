@@ -2,10 +2,13 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { CirclePlus, Search, ShieldCheck } from 'lucide-react';
+import { useAuth } from '@/hooks/use-auth';
 import heroBanner from '@/assets/hero-banner.png';
 import { StatusBadge } from '@/components/ui/status-badge';
 
 const Index = () => {
+  const { user } = useAuth();
+  
   return (
     <>
       {/* Hero section */}
@@ -20,18 +23,36 @@ const Index = () => {
                 Register your items and help prevent the purchase of stolen goods. Protect your belongings and check before you buy.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link to="/register">
-                  <Button size="lg" className="gap-2">
-                    <CirclePlus size={20} />
-                    Register Item
-                  </Button>
-                </Link>
-                <Link to="/search">
-                  <Button size="lg" variant="outline" className="gap-2 bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20">
-                    <Search size={20} />
-                    Search Registry
-                  </Button>
-                </Link>
+                {user ? (
+                  <>
+                    <Link to="/register">
+                      <Button size="lg" className="gap-2">
+                        <CirclePlus size={20} />
+                        Register Item
+                      </Button>
+                    </Link>
+                    <Link to="/search">
+                      <Button size="lg" variant="outline" className="gap-2 bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20">
+                        <Search size={20} />
+                        Search Registry
+                      </Button>
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/auth">
+                      <Button size="lg" className="gap-2">
+                        Get Started
+                      </Button>
+                    </Link>
+                    <Link to="/search">
+                      <Button size="lg" variant="outline" className="gap-2 bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20">
+                        <Search size={20} />
+                        Search Registry
+                      </Button>
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
             <div className="hidden md:block">
