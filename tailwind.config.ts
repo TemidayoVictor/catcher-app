@@ -61,6 +61,11 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				status: {
+					safe: 'hsl(var(--status-safe))',
+					stolen: 'hsl(var(--status-stolen))',
+					unknown: 'hsl(var(--status-unknown))'
 				}
 			},
 			borderRadius: {
@@ -84,12 +89,31 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'pulse-slow': {
+					'0%, 100%': { opacity: 1 },
+					'50%': { opacity: 0.7 },
+				},
+				'fade-in': {
+					from: { opacity: 0, transform: 'translateY(5px)' },
+					to: { opacity: 1, transform: 'translateY(0)' }
+				},
+				'fade-out': {
+					from: { opacity: 1, transform: 'translateY(0)' },
+					to: { opacity: 0, transform: 'translateY(5px)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-slow': 'pulse-slow 3s infinite ease-in-out',
+				'fade-in': 'fade-in 0.3s ease-out',
+				'fade-out': 'fade-out 0.2s ease-in'
+			},
+			backgroundImage: {
+				'gradient-header': 'var(--gradient-header)',
+				'gradient-card': 'var(--gradient-card)'
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
