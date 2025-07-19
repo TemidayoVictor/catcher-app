@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Github, Shield, Mail } from 'lucide-react';
+import { Facebook, Instagram, Shield, MapPin, Phone, Mail } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -44,22 +44,40 @@ export function Footer() {
           </div>
           
           <div>
-            <h4 className="font-medium text-base mb-4">Connect</h4>
-            <div className="flex space-x-4">
-              <a 
-                href="#" 
-                className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="GitHub"
-              >
-                <Github className="h-5 w-5" />
-              </a>
-              <a 
-                href="#" 
-                className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="Email"
-              >
-                <Mail className="h-5 w-5" />
-              </a>
+            <h4 className="font-medium text-base mb-4">Contact Information</h4>
+            <div className="space-y-3 text-sm text-muted-foreground">
+              <div className="flex items-start">
+                <MapPin className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" />
+                <span>Plot 1247 Victoria Island Lagos</span>
+              </div>
+              <div className="flex items-center">
+                <Phone className="h-4 w-4 mr-2 flex-shrink-0" />
+                <span>+2349135819955</span>
+              </div>
+              <div className="flex items-center">
+                <Mail className="h-4 w-4 mr-2 flex-shrink-0" />
+                <span>support@catcher.com.ng</span>
+              </div>
+              <div className="flex space-x-4 pt-2">
+                <a 
+                  href="https://www.facebook.com/share/1EpJ53t6oU/" 
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  aria-label="Facebook"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Facebook className="h-5 w-5" />
+                </a>
+                <a 
+                  href="https://www.instagram.com/catchertechglobal?igsh=OG9mYnBsYmZ4d3Zu" 
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  aria-label="Instagram"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Instagram className="h-5 w-5" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
