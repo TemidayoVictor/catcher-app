@@ -32,9 +32,9 @@ const Index = () => {
               
               {/* Main heading */}
               <h1 className="text-5xl md:text-7xl font-bold leading-tight tracking-tight">
-                Secure Your
+                Choose To
                 <span className="block bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                  Valuables
+                  Be Safe
                 </span>
                 <span className="block text-4xl md:text-5xl font-medium mt-2 opacity-90">
                   with Catcher
@@ -43,9 +43,9 @@ const Index = () => {
               
               {/* Subtitle */}
               <p className="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto leading-relaxed">
-                Register your items and help prevent the purchase of stolen goods. 
+                Begin protecting your belongings for just ₦5,000 per item and help prevent the purchase of stolen goods. 
                 <span className="block mt-2 text-lg md:text-xl opacity-80">
-                  Protect your belongings and check before you buy.
+                  Register your items and check before you buy.
                 </span>
               </p>
               
