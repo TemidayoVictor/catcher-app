@@ -45,9 +45,10 @@ export function NavBar() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <NavLink to="/" className="flex items-center space-x-2">
-            <img src="https://i.ibb.co/JjTkKpM/logo.png" alt="Catcher Logo" className="h-8 w-auto" />
-            <span className="font-bold text-xl text-primary">Catcher</span>
+          <NavLink to="/" className="flex items-center">
+            <span className="font-bold text-2xl bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+              Catcher
+            </span>
           </NavLink>
 
           {/* Desktop Nav Links */}
