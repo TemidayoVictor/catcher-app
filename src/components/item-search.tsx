@@ -40,7 +40,7 @@ export function ItemSearch({ onStatusChange }: ItemSearchProps) {
       <form onSubmit={handleSearch} className="flex space-x-2">
         <Input
           type="text"
-          placeholder="Enter serial number or search terms..."
+          placeholder="Enter exact serial number..."
           value={searchQuery}
           onChange={(e) => {
             setSearchQuery(e.target.value);

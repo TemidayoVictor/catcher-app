@@ -165,7 +165,7 @@ export const useItems = () => {
     }
   };
 
-  // Search items by serial number (includes stolen items from all users)
+  // Search items by serial number (only exact matches for security)
   const searchBySerial = async (serialNumber: string) => {
     try {
       const { data, error } = await supabase
@@ -182,10 +182,9 @@ export const useItems = () => {
           image_url,
           owner,
           contact_info,
-          user_id,
-          profiles!inner(display_name)
+          user_id
         `)
-        .ilike('serial_number', `%${serialNumber}%`);
+        .eq('serial_number', serialNumber);
 
       if (error) throw error;
       return data || [];

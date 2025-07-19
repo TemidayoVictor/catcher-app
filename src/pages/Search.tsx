@@ -18,7 +18,7 @@ const Search = () => {
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl font-bold mb-2 text-center">Search Registry</h1>
         <p className="text-muted-foreground mb-8 text-center">
-          Search for items by serial number to verify if they've been reported stolen.
+          Enter the exact serial number to check if an item has been reported stolen.
         </p>
         
         <div className="bg-card rounded-lg shadow-sm border p-6">
