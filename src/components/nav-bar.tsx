@@ -46,7 +46,7 @@ export function NavBar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <NavLink to="/" className="flex items-center">
-            <span className="font-bold text-2xl text-white font-inter tracking-tight">
+            <span className="font-bold text-2xl text-primary md:text-white font-inter tracking-tight">
               Catcher
             </span>
           </NavLink>
