@@ -11,28 +11,55 @@ const Index = () => {
   return (
     <>
       {/* Hero section */}
-      <section className="bg-gradient-header text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="space-y-6">
-              <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                Secure Your Valuables with Catcher
+      <section className="relative bg-gradient-header text-white overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-white/5 rounded-full blur-xl"></div>
+          <div className="absolute bottom-20 right-10 w-48 h-48 bg-white/5 rounded-full blur-xl"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white/3 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-40">
+          <div className="max-w-5xl mx-auto text-center">
+            <div className="space-y-8">
+              {/* Badge */}
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-sm font-medium">
+                <ShieldCheck size={16} className="mr-2" />
+                Trusted Item Registry Platform
+              </div>
+              
+              {/* Main heading */}
+              <h1 className="text-5xl md:text-7xl font-bold leading-tight tracking-tight">
+                Secure Your
+                <span className="block bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                  Valuables
+                </span>
+                <span className="block text-4xl md:text-5xl font-medium mt-2 opacity-90">
+                  with Catcher
+                </span>
               </h1>
-              <p className="text-lg md:text-xl opacity-90">
-                Register your items and help prevent the purchase of stolen goods. Protect your belongings and check before you buy.
+              
+              {/* Subtitle */}
+              <p className="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto leading-relaxed">
+                Register your items and help prevent the purchase of stolen goods. 
+                <span className="block mt-2 text-lg md:text-xl opacity-80">
+                  Protect your belongings and check before you buy.
+                </span>
               </p>
-              <div className="flex flex-wrap gap-4 justify-center">
+              
+              {/* CTA Buttons */}
+              <div className="flex flex-wrap gap-6 justify-center pt-4">
                 {user ? (
                   <>
                     <Link to="/register">
-                      <Button size="lg" className="gap-2">
-                        <CirclePlus size={20} />
+                      <Button size="lg" className="gap-3 px-8 py-4 text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                        <CirclePlus size={24} />
                         Register Item
                       </Button>
                     </Link>
                     <Link to="/search">
-                      <Button size="lg" variant="outline" className="gap-2 bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20">
-                        <Search size={20} />
+                      <Button size="lg" variant="outline" className="gap-3 px-8 py-4 text-lg font-semibold bg-white/10 backdrop-blur-sm border-white/30 hover:bg-white/20 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                        <Search size={24} />
                         Search Registry
                       </Button>
                     </Link>
@@ -40,18 +67,34 @@ const Index = () => {
                 ) : (
                   <>
                     <Link to="/auth">
-                      <Button size="lg" className="gap-2">
+                      <Button size="lg" className="gap-3 px-8 py-4 text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                         Get Started
                       </Button>
                     </Link>
                     <Link to="/search">
-                      <Button size="lg" variant="outline" className="gap-2 bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20">
-                        <Search size={20} />
+                      <Button size="lg" variant="outline" className="gap-3 px-8 py-4 text-lg font-semibold bg-white/10 backdrop-blur-sm border-white/30 hover:bg-white/20 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                        <Search size={24} />
                         Search Registry
                       </Button>
                     </Link>
                   </>
                 )}
+              </div>
+              
+              {/* Trust indicators */}
+              <div className="flex flex-wrap items-center justify-center gap-8 pt-8 text-sm opacity-70">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  Secure & Encrypted
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                  Real-time Updates
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                  Community Driven
+                </div>
               </div>
             </div>
           </div>
