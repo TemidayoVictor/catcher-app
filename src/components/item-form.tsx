@@ -255,7 +255,7 @@ export function ItemForm({ onSubmit, defaultValues, isLoading = false }: ItemFor
         </div>
 
         <Button type="submit" className="w-full" disabled={isLoading}>
-          {isLoading ? "Saving..." : defaultValues ? "Update Item" : "Register Item"}
+          {isLoading ? "Processing Payment..." : defaultValues ? "Update Item" : "Proceed to Payment (₦5,000)"}
         </Button>
       </form>
     </Form>

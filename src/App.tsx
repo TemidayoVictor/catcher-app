@@ -13,6 +13,7 @@ import Search from "./pages/Search";
 import MyItems from "./pages/MyItems";
 import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
+import PaymentSuccess from "./pages/PaymentSuccess";
 
 // Layout components
 import { NavBar } from "./components/nav-bar";
@@ -37,6 +38,7 @@ const App = () => (
                   <Route path="/register" element={<Register />} />
                   <Route path="/search" element={<Search />} />
                   <Route path="/my-items" element={<MyItems />} />
+                  <Route path="/payment-success" element={<PaymentSuccess />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
