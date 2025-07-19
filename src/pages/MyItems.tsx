@@ -1,28 +1,41 @@
 import React from 'react';
 import { ItemCard } from '@/components/item-card';
-import { useItemStore } from '@/lib/store';
-import { useToast } from '@/hooks/use-toast';
+import { useItems } from '@/hooks/use-items';
+import { useAuth } from '@/hooks/use-auth';
 import { Button } from '@/components/ui/button';
-import { CirclePlus } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { CirclePlus, Loader2 } from 'lucide-react';
+import { Link, Navigate } from 'react-router-dom';
 
 const MyItems = () => {
-  const { items, updateItemStatus } = useItemStore();
-  const { toast } = useToast();
+  const { items, loading, updateItemStatus } = useItems();
+  const { user } = useAuth();
   
-  const handleStatusToggle = (id: string) => {
+  // Redirect to auth if not logged in
+  if (!user) {
+    return <Navigate to="/auth" replace />;
+  }
+  
+  const handleStatusToggle = async (id: string) => {
     const item = items.find(item => item.id === id);
     if (!item) return;
     
     const newStatus = item.status === 'stolen' ? 'safe' : 'stolen';
-    updateItemStatus(id, newStatus);
-    
-    toast({
-      title: "Status Updated",
-      description: `Item marked as ${newStatus === 'stolen' ? 'stolen' : 'safe'}.`,
-      variant: newStatus === 'stolen' ? "destructive" : "default",
-    });
+    try {
+      await updateItemStatus(id, newStatus);
+    } catch (error) {
+      // Error handling is done in the hook
+    }
   };
+
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div className="max-w-4xl mx-auto flex justify-center items-center py-12">
+          <Loader2 className="h-8 w-8 animate-spin" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-24">

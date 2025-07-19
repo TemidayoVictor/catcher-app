@@ -14,15 +14,15 @@ const itemFormSchema = z.object({
   name: z.string().min(2, {
     message: "Item name must be at least 2 characters.",
   }),
-  serialNumber: z.string().min(4, {
+  serial_number: z.string().min(4, {
     message: "Serial number must be at least 4 characters.",
   }),
   category: z.string().optional(),
   description: z.string().optional(),
   status: z.enum(['safe', 'stolen', 'unknown'] as const).default('safe'),
-  imageUrl: z.string().url().optional().or(z.literal('')),
+  image_url: z.string().url().optional().or(z.literal('')),
   owner: z.string().optional(),
-  contactInfo: z.string().optional(),
+  contact_info: z.string().optional(),
 });
 
 type ItemFormValues = z.infer<typeof itemFormSchema>;
@@ -53,13 +53,13 @@ export function ItemForm({ onSubmit, defaultValues, isLoading = false }: ItemFor
     resolver: zodResolver(itemFormSchema),
     defaultValues: {
       name: '',
-      serialNumber: '',
+      serial_number: '',
       category: 'Electronics',
       description: '',
       status: 'safe' as ItemStatus,
-      imageUrl: '',
+      image_url: '',
       owner: '',
-      contactInfo: '',
+      contact_info: '',
       ...defaultValues
     }
   });
@@ -102,7 +102,7 @@ export function ItemForm({ onSubmit, defaultValues, isLoading = false }: ItemFor
           
           <FormField
             control={form.control}
-            name="serialNumber"
+            name="serial_number"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Serial Number</FormLabel>
@@ -203,7 +203,7 @@ export function ItemForm({ onSubmit, defaultValues, isLoading = false }: ItemFor
         
         <FormField
           control={form.control}
-          name="imageUrl"
+          name="image_url"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Image URL</FormLabel>
@@ -238,7 +238,7 @@ export function ItemForm({ onSubmit, defaultValues, isLoading = false }: ItemFor
           
           <FormField
             control={form.control}
-            name="contactInfo"
+            name="contact_info"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Contact Information</FormLabel>

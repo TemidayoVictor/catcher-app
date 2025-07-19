@@ -31,15 +31,15 @@ export function ItemCard({ item, onStatusChange, showActions = true }: ItemCardP
         <div className="grid gap-2">
           <div className="flex items-center gap-2 text-sm">
             <ScanLine className="h-4 w-4 text-primary" />
-            <span className="font-mono font-medium">{item.serialNumber}</span>
+            <span className="font-mono font-medium">{item.serial_number}</span>
           </div>
           {item.description && (
             <p className="text-sm text-muted-foreground">{item.description}</p>
           )}
-          {item.imageUrl && (
+          {item.image_url && (
             <div className="mt-2 overflow-hidden rounded-md">
               <img 
-                src={item.imageUrl} 
+                src={item.image_url} 
                 alt={item.name} 
                 className="h-48 w-full object-cover" 
               />
@@ -50,7 +50,7 @@ export function ItemCard({ item, onStatusChange, showActions = true }: ItemCardP
       <CardFooter className="flex justify-between pt-0 pb-3 text-xs text-muted-foreground">
         <div className="flex items-center gap-1">
           <CalendarClock className="h-3 w-3" />
-          <span>Updated {formatDistanceToNow(new Date(item.updatedAt))} ago</span>
+          <span>Updated {formatDistanceToNow(new Date(item.updated_at))} ago</span>
         </div>
         
         {showActions && onStatusChange && item.status !== 'stolen' && (

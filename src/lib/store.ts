@@ -5,8 +5,8 @@ import { Item, ItemStatus } from '@/types/item';
 
 interface ItemStore {
   items: Item[];
-  addItem: (item: Omit<Item, 'id' | 'createdAt' | 'updatedAt'>) => void;
-  updateItem: (id: string, updates: Partial<Omit<Item, 'id' | 'createdAt'>>) => void;
+  addItem: (item: Omit<Item, 'id' | 'created_at' | 'updated_at' | 'user_id'>) => void;
+  updateItem: (id: string, updates: Partial<Omit<Item, 'id' | 'created_at' | 'user_id'>>) => void;
   deleteItem: (id: string) => void;
   getItemBySerial: (serialNumber: string) => Item | undefined;
   searchItems: (query: string) => Item[];
@@ -22,8 +22,9 @@ export const useItemStore = create<ItemStore>()(
         const newItem: Item = {
           ...itemData,
           id: uuidv4(),
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          user_id: 'local-user', // fallback for local store
         };
         
         set((state) => ({
@@ -37,7 +38,7 @@ export const useItemStore = create<ItemStore>()(
         set((state) => ({
           items: state.items.map((item) => 
             item.id === id 
-              ? { ...item, ...updates, updatedAt: new Date() } 
+              ? { ...item, ...updates, updated_at: new Date().toISOString() } 
               : item
           )
         }));
@@ -52,7 +53,7 @@ export const useItemStore = create<ItemStore>()(
       getItemBySerial: (serialNumber) => {
         const { items } = get();
         return items.find(
-          (item) => item.serialNumber.toLowerCase() === serialNumber.toLowerCase()
+          (item) => item.serial_number.toLowerCase() === serialNumber.toLowerCase()
         );
       },
       
@@ -62,7 +63,7 @@ export const useItemStore = create<ItemStore>()(
         
         return items.filter((item) => 
           item.name.toLowerCase().includes(lowercaseQuery) ||
-          item.serialNumber.toLowerCase().includes(lowercaseQuery) ||
+          item.serial_number.toLowerCase().includes(lowercaseQuery) ||
           item.description?.toLowerCase().includes(lowercaseQuery) ||
           item.category?.toLowerCase().includes(lowercaseQuery)
         );
@@ -72,7 +73,7 @@ export const useItemStore = create<ItemStore>()(
         set((state) => ({
           items: state.items.map((item) => 
             item.id === id 
-              ? { ...item, status, updatedAt: new Date() } 
+              ? { ...item, status, updated_at: new Date().toISOString() } 
               : item
           )
         }));

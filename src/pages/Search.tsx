@@ -1,19 +1,16 @@
 import React from 'react';
 import { ItemSearch } from '@/components/item-search';
-import { useItemStore } from '@/lib/store';
-import { useToast } from '@/hooks/use-toast';
+import { useItems } from '@/hooks/use-items';
 
 const Search = () => {
-  const { updateItemStatus } = useItemStore();
-  const { toast } = useToast();
+  const { updateItemStatus } = useItems();
   
-  const handleStatusChange = (id: string) => {
-    updateItemStatus(id, 'stolen');
-    toast({
-      title: "Status Updated",
-      description: "The item has been marked as stolen.",
-      variant: "destructive",
-    });
+  const handleStatusChange = async (id: string) => {
+    try {
+      await updateItemStatus(id, 'stolen');
+    } catch (error) {
+      // Error handling is done in the hook
+    }
   };
 
   return (

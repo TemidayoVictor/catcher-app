@@ -14,6 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
+      items: {
+        Row: {
+          category: string | null
+          contact_info: string | null
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          name: string
+          owner: string | null
+          serial_number: string
+          status: Database["public"]["Enums"]["item_status"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category?: string | null
+          contact_info?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          name: string
+          owner?: string | null
+          serial_number: string
+          status?: Database["public"]["Enums"]["item_status"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string | null
+          contact_info?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          name?: string
+          owner?: string | null
+          serial_number?: string
+          status?: Database["public"]["Enums"]["item_status"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -49,7 +94,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      item_status: "safe" | "stolen" | "unknown"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -176,6 +221,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      item_status: ["safe", "stolen", "unknown"],
+    },
   },
 } as const

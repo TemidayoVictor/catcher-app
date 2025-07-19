@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useItemStore } from '@/lib/store';
+import { useItems } from '@/hooks/use-items';
 import { ItemCard } from '@/components/item-card';
-import { Search, AlertCircle } from 'lucide-react';
+import { Search, AlertCircle, Loader2 } from 'lucide-react';
 import { StatusBadge } from './ui/status-badge';
 
 interface ItemSearchProps {
@@ -13,27 +13,27 @@ interface ItemSearchProps {
 export function ItemSearch({ onStatusChange }: ItemSearchProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchPerformed, setSearchPerformed] = useState(false);
-  const [exactSearch, setExactSearch] = useState(false);
-  const { getItemBySerial, searchItems } = useItemStore();
+  const [searching, setSearching] = useState(false);
+  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const { searchBySerial } = useItems();
   
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!searchQuery.trim()) return;
+    
+    setSearching(true);
     setSearchPerformed(true);
-  };
-
-  // Get search results
-  const getSearchResults = () => {
-    if (!searchQuery.trim()) return [];
     
-    if (exactSearch) {
-      const result = getItemBySerial(searchQuery.trim());
-      return result ? [result] : [];
+    try {
+      const results = await searchBySerial(searchQuery.trim());
+      setSearchResults(results);
+    } catch (error) {
+      console.error('Search error:', error);
+      setSearchResults([]);
+    } finally {
+      setSearching(false);
     }
-    
-    return searchItems(searchQuery);
   };
-  
-  const searchResults = searchPerformed ? getSearchResults() : [];
   
   return (
     <div className="space-y-4">
@@ -48,23 +48,16 @@ export function ItemSearch({ onStatusChange }: ItemSearchProps) {
           }}
           className="flex-1"
         />
-        <Button type="submit">
-          <Search className="h-4 w-4 mr-2" />
-          Search
+        <Button type="submit" disabled={searching}>
+          {searching ? (
+            <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+          ) : (
+            <Search className="h-4 w-4 mr-2" />
+          )}
+          {searching ? 'Searching...' : 'Search'}
         </Button>
       </form>
       
-      <div className="flex items-center space-x-2">
-        <label className="text-sm flex items-center space-x-2 cursor-pointer">
-          <input 
-            type="checkbox" 
-            checked={exactSearch}
-            onChange={() => setExactSearch(!exactSearch)}
-            className="rounded border-gray-300 text-primary focus:ring-primary"
-          />
-          <span>Exact serial number match</span>
-        </label>
-      </div>
       
       {searchPerformed && (
         <div className="space-y-4">
@@ -91,10 +84,7 @@ export function ItemSearch({ onStatusChange }: ItemSearchProps) {
               <AlertCircle className="h-8 w-8 text-muted-foreground" />
               <h3 className="text-lg font-medium">No items found</h3>
               <p className="text-sm text-muted-foreground">
-                {exactSearch 
-                  ? "No item with this exact serial number was found in the registry." 
-                  : "Try a different search term or check the serial number."
-                }
+                No items found matching your search. Try a different serial number or search term.
               </p>
               <div className="mt-2">
                 <StatusBadge status="unknown" size="lg" />

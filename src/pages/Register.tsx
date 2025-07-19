@@ -1,18 +1,24 @@
 import React from 'react';
 import { ItemForm } from '@/components/item-form';
-import { useItemStore } from '@/lib/store';
-import { useToast } from '@/hooks/use-toast';
+import { useItems } from '@/hooks/use-items';
+import { useAuth } from '@/hooks/use-auth';
+import { Navigate } from 'react-router-dom';
 
 const Register = () => {
-  const { addItem } = useItemStore();
-  const { toast } = useToast();
+  const { addItem } = useItems();
+  const { user } = useAuth();
   
-  const handleSubmit = (data: any) => {
-    addItem(data);
-    toast({
-      title: "Item Registered",
-      description: `${data.name} has been added to the registry.`,
-    });
+  // Redirect to auth if not logged in
+  if (!user) {
+    return <Navigate to="/auth" replace />;
+  }
+  
+  const handleSubmit = async (data: any) => {
+    try {
+      await addItem(data);
+    } catch (error) {
+      // Error handling is done in the hook
+    }
   };
 
   return (
