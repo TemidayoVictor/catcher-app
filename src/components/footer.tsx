@@ -8,9 +8,10 @@ export function Footer() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="font-bold text-lg mb-4 flex items-center">
-              <Shield className="mr-2 h-5 w-5 text-primary" />
-              Catcher
+            <h3 className="font-bold text-lg mb-4 flex items-center font-inter">
+              <span className="font-bold text-xl bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                Catcher
+              </span>
             </h3>
             <p className="text-sm text-muted-foreground">
               A secure platform to register your valuables and help prevent the purchase of stolen items.
