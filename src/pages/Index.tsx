@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { CirclePlus, Search, ShieldCheck } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
-import heroBanner from '@/assets/hero-banner.png';
 import { StatusBadge } from '@/components/ui/status-badge';
 
 const Index = () => {
@@ -14,7 +13,7 @@ const Index = () => {
       {/* Hero section */}
       <section className="bg-gradient-header text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="max-w-4xl mx-auto text-center">
             <div className="space-y-6">
               <h1 className="text-4xl md:text-5xl font-bold leading-tight">
                 Secure Your Valuables with Catcher
@@ -22,7 +21,7 @@ const Index = () => {
               <p className="text-lg md:text-xl opacity-90">
                 Register your items and help prevent the purchase of stolen goods. Protect your belongings and check before you buy.
               </p>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-4 justify-center">
                 {user ? (
                   <>
                     <Link to="/register">
@@ -54,13 +53,6 @@ const Index = () => {
                   </>
                 )}
               </div>
-            </div>
-            <div className="hidden md:block">
-              <img 
-                src={heroBanner} 
-                alt="Catcher Interface" 
-                className="rounded-lg shadow-2xl" 
-              />
             </div>
           </div>
         </div>
