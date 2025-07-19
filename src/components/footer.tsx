@@ -10,7 +10,7 @@ export function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-4 flex items-center">
               <Shield className="mr-2 h-5 w-5 text-primary" />
-              ItemRegistry
+              Catcher
             </h3>
             <p className="text-sm text-muted-foreground">
               A secure platform to register your valuables and help prevent the purchase of stolen items.
@@ -65,7 +65,7 @@ export function Footer() {
         </div>
         
         <div className="border-t border-border/50 mt-8 pt-6 text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} ItemRegistry. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Catcher. All rights reserved.</p>
           <p className="mt-1">This is a demo application. Items registered here are not stored permanently.</p>
         </div>
       </div>

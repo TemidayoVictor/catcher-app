@@ -17,7 +17,7 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
               <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                Secure Your Valuables with ItemRegistry
+                Secure Your Valuables with Catcher
               </h1>
               <p className="text-lg md:text-xl opacity-90">
                 Register your items and help prevent the purchase of stolen goods. Protect your belongings and check before you buy.
@@ -58,7 +58,7 @@ const Index = () => {
             <div className="hidden md:block">
               <img 
                 src={heroBanner} 
-                alt="Item Registry Interface" 
+                alt="Catcher Interface" 
                 className="rounded-lg shadow-2xl" 
               />
             </div>
