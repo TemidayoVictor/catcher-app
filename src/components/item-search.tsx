@@ -63,7 +63,7 @@ export function ItemSearch({ onStatusChange }: ItemSearchProps) {
         <div className="space-y-4">
           {searchResults.length > 0 ? (
             <div className="space-y-4 animate-fade-in">
-              <div className="py-2 px-4 bg-muted rounded-lg">
+              <div className="py-3 px-4 bg-muted rounded-lg">
                 <p className="text-sm text-muted-foreground">
                   Found {searchResults.length} {searchResults.length === 1 ? 'item' : 'items'}
                 </p>
@@ -71,11 +71,37 @@ export function ItemSearch({ onStatusChange }: ItemSearchProps) {
               
               <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-1">
                 {searchResults.map(item => (
-                  <ItemCard 
-                    key={item.id} 
-                    item={item}
-                    onStatusChange={onStatusChange}
-                  />
+                  <div key={item.id} className="border rounded-lg p-4 bg-card">
+                    <div className="flex justify-between items-start mb-3">
+                      <h3 className="text-lg font-semibold">{item.name}</h3>
+                      <StatusBadge status={item.status} size="lg" />
+                    </div>
+                    
+                    <div className="space-y-2 text-sm text-muted-foreground">
+                      <p><strong>Serial Number:</strong> {item.serial_number}</p>
+                      {item.category && <p><strong>Category:</strong> {item.category}</p>}
+                      {item.description && <p><strong>Description:</strong> {item.description}</p>}
+                      {item.owner && <p><strong>Owner:</strong> {item.owner}</p>}
+                      {item.contact_info && <p><strong>Contact:</strong> {item.contact_info}</p>}
+                    </div>
+                    
+                    <div className="mt-4 pt-3 border-t">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-muted-foreground">
+                          Last updated: {new Date(item.updated_at).toLocaleDateString()}
+                        </span>
+                        {item.status === 'safe' && onStatusChange && (
+                          <Button 
+                            variant="destructive" 
+                            size="sm"
+                            onClick={() => onStatusChange(item.id)}
+                          >
+                            Mark as Stolen
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
