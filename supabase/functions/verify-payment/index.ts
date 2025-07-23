@@ -19,7 +19,7 @@ serve(async (req) => {
   try {
     // Create Supabase client with service role for inserting items
     const supabaseService = createClient(
-      Deno.env.get("SUPABASE_URL") ?? "",
+      "https://dfsvmucqlfoszsfyjxbn.supabase.co",
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
     );
 

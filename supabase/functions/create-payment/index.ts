@@ -20,8 +20,8 @@ serve(async (req) => {
   try {
     // Create Supabase client
     const supabaseClient = createClient(
-      Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_ANON_KEY") ?? ""
+      "https://dfsvmucqlfoszsfyjxbn.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRmc3ZtdWNxbGZvc3pzZnlqeGJuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU5MjQwMDEsImV4cCI6MjA2MTUwMDAwMX0.Qea6jAF7SFOWcd941nIGBjO1bifbGRBaihol5-A3h8I"
     );
 
     // Get user from auth header
