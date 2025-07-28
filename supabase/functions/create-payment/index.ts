@@ -36,36 +36,21 @@ serve(async (req) => {
 
     const { email, itemData }: PaymentRequest = await req.json();
     
-    // Create payment with Paystack
-    const paystackResponse = await fetch("https://api.paystack.co/transaction/initialize", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${Deno.env.get("PAYSTACK_LIVE_SECRET_KEY")}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    // Invoke Paystack transaction initialization function
+    const { data: paymentData, error: paymentError } = await supabaseClient.functions.invoke('paystack-transaction-init', {
+      body: {
         email: email,
         amount: 500000, // ₦5,000 in kobo (Paystack uses kobo)
-        currency: "NGN",
-        reference: `item_${user.id}_${Date.now()}`,
-        callback_url: `${req.headers.get("origin")}/payment-success`,
-        metadata: {
-          user_id: user.id,
-          item_data: JSON.stringify(itemData),
-        },
-      }),
+      },
     });
 
-    const paymentData = await paystackResponse.json();
-    console.log("Paystack response:", paymentData);
-
-    if (!paymentData.status) {
-      throw new Error(paymentData.message || "Failed to initialize payment");
+    if (paymentError) {
+      throw new Error(paymentError.message || "Failed to initialize payment");
     }
 
     return new Response(JSON.stringify({ 
-      authorization_url: paymentData.data.authorization_url,
-      reference: paymentData.data.reference 
+      authorization_url: paymentData.authorization_url,
+      reference: paymentData.reference 
     }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
