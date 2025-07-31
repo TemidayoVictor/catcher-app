@@ -19,7 +19,7 @@ const Register = () => {
       setIsProcessingPayment(true);
       
       // Create payment with Paystack
-      const { data: paymentData, error } = await supabase.functions.invoke('create-payment', {
+      const { data: paymentData, error } = await supabase.functions.invoke('payment-transaction-init', {
         body: {
           email: user.email,
           itemData: data,
