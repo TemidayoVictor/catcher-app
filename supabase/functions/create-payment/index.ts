@@ -37,7 +37,7 @@ serve(async (req) => {
     const { email, itemData }: PaymentRequest = await req.json();
     
     // Invoke Paystack transaction initialization function
-    const { data: paymentData, error: paymentError } = await supabaseClient.functions.invoke('paystack-transaction-init', {
+    const { data: paymentData, error: paymentError } = await supabaseClient.functions.invoke('create-payment', {
       body: {
         email: email,
         amount: 500000, // ₦5,000 in kobo (Paystack uses kobo)
