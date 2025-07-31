@@ -12,12 +12,6 @@ interface PaymentRequest {
 }
 
 serve(async (req) => {
-  // Handle CORS preflight requests
-  if (req.method === "OPTIONS") {
-    return new Response(null, { headers: corsHeaders });
-  }
-
-
   try {
     // Create Supabase client
     const supabaseClient = createClient(
