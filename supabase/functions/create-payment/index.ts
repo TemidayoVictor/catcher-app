@@ -43,16 +43,23 @@ serve(async (req) => {
 
     const { email, itemData }: PaymentRequest = await req.json();
     
-    // Invoke Paystack transaction initialization function
-    const { data: paymentData, error: paymentError } = await supabaseClient.functions.invoke('create-payment', {
-      body: {
-        email: email,
-        amount: 500000, // ₦5,000 in kobo (Paystack uses kobo)
+    // Initialize Paystack payment
+    const paystackResponse = await fetch('https://api.paystack.co/transaction/initialize', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${Deno.env.get('PAYSTACK_LIVE_SECRET_KEY')}`,
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify({
+        email: email,
+        amount: 500000, // ₦5,000 in kobo
+      }),
     });
 
-    if (paymentError) {
-      throw new Error(paymentError.message || "Failed to initialize payment");
+    const paymentData = await paystackResponse.json();
+
+    if (!paystackResponse.ok) {
+      throw new Error(paymentData.message || "Failed to initialize payment");
     }
 
     return new Response(JSON.stringify({ 
