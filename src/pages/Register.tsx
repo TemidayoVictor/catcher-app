@@ -20,7 +20,6 @@ const Register = () => {
       
       // Create payment with Paystack
       const { data: paymentData, error } = await supabase.functions.invoke('create-payment', {
-        method: 'POST',
         body: {
           email: user.email,
           itemData: data,
